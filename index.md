@@ -1,37 +1,222 @@
-## Welcome to GitHub Pages
+<!DOCTYPE html>
+<html lang="ZH-cn">
 
-You can use the [editor on GitHub](https://github.com/18707025422/didi/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算器</title>
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+        
+        #zong {
+            height: 643px;
+            width: 360px;
+            margin: 0px auto;
+            background-color: rgb(194, 211, 238);
+        }
+        
+        #shang input {
+            width: 356px;
+            height: 60px;
+            border-width: 2px;
+            font-size: 28px;
+        }
+        
+        .zhongbu {
+            height: 120px;
+            width: 90px;
+            float: left;
+            background-color: rgb(194, 211, 238);
+            font-size: 28px;
+        }
+        
+        .xiamian {
+            height: 100px;
+            width: 90px;
+            float: left;
+            background-color: rgb(194, 211, 238);
+            font-size: 28px;
+        }
+        
+        #di000 {
+            width: 180px;
+        }
+        
+        .zhongbu:hover,
+        .xiamian:hover {
+            background-color: rgb(148, 176, 219);
+        }
+    </style>
+    <script>
+        var diyiweishu = 0;
+        var jieguo = 0;
+        var numall = "";
+        var yunsuanfu = 1;
+        var shiroushiyongbaifenhao = false;
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+        function tianjiashu(k) {
+            if (shiroushiyongbaifenhao == true) {
+                qingkong();
+                alert("输入有误!");
+            } else if ((diyiweishu == null)) {
+                qingkong();
+                numall = numall + k;
+                diyiweishu = Number(numall);
+                var kkk = document.getElementById("jieguodeshu");
+                kkk.value = diyiweishu;
+            } else {
+                numall = numall + k;
+                diyiweishu = Number(numall);
+                var kkk = document.getElementById("jieguodeshu");
+                kkk.value = diyiweishu;
+            }
 
-### Markdown
+        }
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+        function yunsuan(i) {
+            if (diyiweishu == null) {
+                diyiweishu = 0;
+            }
+            switch (yunsuanfu) {
+                case 1:
+                    jieguo = jieguo + diyiweishu;
+                    shiroushiyongbaifenhao = false;
+                    break;
+                case 2:
+                    jieguo = jieguo - diyiweishu;
+                    shiroushiyongbaifenhao = false;
+                    break;
+                case 3:
+                    jieguo = jieguo * diyiweishu;
+                    shiroushiyongbaifenhao = false;
+                    break;
+                case 4:
+                    jieguo = jieguo / diyiweishu;
+                    shiroushiyongbaifenhao = false;
+                    break;
+            }
+            numall = "";
+            yunsuanfu = i;
+        }
 
-```markdown
-Syntax highlighted code block
+        function daan() {
+            yunsuan(1);
+            var kkk = document.getElementById("jieguodeshu");
+            kkk.value = jieguo;
+            numall = "";
+            diyiweishu = null;
+            shiroushiyongbaifenhao = false;
+        }
 
-# Header 1
-## Header 2
-### Header 3
+        function qingkong() {
+            var kkk = document.getElementById("jieguodeshu");
+            kkk.value = 0;
+            numall = "";
+            diyiweishu = 0;
+            jieguo = 0;
+            yunsuanfu = 1;
+            shiroushiyongbaifenhao = false;
 
-- Bulleted
-- List
+        }
 
-1. Numbered
-2. List
+        function shanchu() {
+            if (diyiweishu != null) {
+                numall = numall.substring(0, numall.length - 1);
+                diyiweishu = Number(numall);
+                var kkk = document.getElementById("jieguodeshu");
+                kkk.value = diyiweishu;
+            } else {
+                qingkong();
+            }
 
-**Bold** and _Italic_ and `Code` text
+        }
 
-[Link](url) and ![Image](src)
-```
+        function baifenhao() {
+            if (diyiweishu != null) {
+                diyiweishu = diyiweishu / 100;
+                shiroushiyongbaifenhao = true;
+            } else {
+                jieguo = jieguo / 100;
+                shiroushiyongbaifenhao = true;
+            }
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+        }
+    </script>
+</head>
 
-### Jekyll Themes
+<body>
+    <div id="zong">
+        <form>
+            <div id="shang">
+                <input type="text" value="0" disabled="disabled" id="jieguodeshu" />
+            </div>
+            <div>
+                <div>
+                    <input type="button" value="C" class="zhongbu" onclick="qingkong()" />
+                </div>
+                <div>
+                    <input type="button" value="DEL" class="zhongbu" onclick="shanchu()" />
+                </div>
+                <div>
+                    <input type="button" value="%" class="zhongbu" onclick="baifenhao()" />
+                </div>
+                <div>
+                    <input type="button" value="/" class="zhongbu" onclick="yunsuan(4)" />
+                </div>
+                <div>
+                    <input type="button" value="7" class="zhongbu" onclick="tianjiashu(7)" />
+                </div>
+                <div>
+                    <input type="button" value="8" class="zhongbu" onclick="tianjiashu(8)" />
+                </div>
+                <div>
+                    <input type="button" value="9" class="zhongbu" onclick="tianjiashu(9)" />
+                </div>
+                <div>
+                    <input type="button" value="*" class="zhongbu" onclick="yunsuan(3)" />
+                </div>
+                <div>
+                    <input type="button" value="4" class="zhongbu" onclick="tianjiashu(4)" />
+                </div>
+                <div>
+                    <input type="button" value="5" class="zhongbu" onclick="tianjiashu(5)" />
+                </div>
+                <div>
+                    <input type="button" value="6" class="zhongbu" onclick="tianjiashu(6)" />
+                </div>
+                <div>
+                    <input type="button" value="-" class="zhongbu" onclick="yunsuan(2)" />
+                </div>
+                <div>
+                    <input type="button" value="1" class="zhongbu" onclick="tianjiashu(1)" />
+                </div>
+                <div>
+                    <input type="button" value="2" class="zhongbu" onclick="tianjiashu(2)" />
+                </div>
+                <div>
+                    <input type="button" value="3" class="zhongbu" onclick="tianjiashu(3)" />
+                </div>
+                <div>
+                    <input type="button" value="+" class="zhongbu" onclick="yunsuan(1)" />
+                </div>
+            </div>
+            <div id="xia">
+                <div>
+                    <input type="button" value="0" id="di000" class="xiamian" onclick="tianjiashu(0)" />
+                </div>
+                <div>
+                    <input type="button" value="." class="xiamian" onclick="tianjiashu('.')" />
+                </div>
+                <div>
+                    <input type="button" value="=" class="xiamian" onclick="daan()" />
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/18707025422/didi/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+</html>
